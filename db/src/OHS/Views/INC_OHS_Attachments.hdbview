@@ -1,0 +1,13 @@
+VIEW INC_OHS_Attachments AS
+SELECT 
+    ATT.ATTID,
+    ATT.INCID,
+    ATT.FLTTL,
+    ATT.FILTP,
+    ATT.FLDES,
+    ATT.ISCON,
+    ATT.OBJCT
+FROM 
+    "INC_T_ATACH" ATT 
+WHERE 
+    ATT.ISDEL = '0';

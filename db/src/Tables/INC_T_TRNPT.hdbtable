@@ -1,0 +1,23 @@
+COLUMN TABLE "INC_T_TRNPT"( 
+    "TRSID" INTEGER NOT NULL primary key GENERATED ALWAYS AS IDENTITY ( START WITH 1 INCREMENT BY 1) COMMENT 'Unique Id',
+    "INCID" INTEGER COMMENT 'Incident Id',
+    "TYPTR" INTEGER COMMENT 'Type of Transport',
+    "LOCXX" NVARCHAR(30) COMMENT 'Location',
+    "SPEXX" SMALLINT COMMENT 'Was vehicle speed excessive?',
+    "POLIV" SMALLINT COMMENT 'Were police involved at the scene?',
+    "ACTTI" NVARCHAR(100) COMMENT 'Activity at Time of Incident',
+    "OPASS" SMALLINT COMMENT 'Were there other passengers in the vehicle?',
+    "INJUR" SMALLINT COMMENT 'Were there any injuries?',
+    "OVCXX" NVARCHAR(100) COMMENT 'Owner of Vehicle / Craft or Designation',
+    "VEIID" NVARCHAR(100) COMMENT 'Vehicle Identifier',
+    "MDLYR" NVARCHAR(4) COMMENT 'Model Year',
+    "VECDS" NVARCHAR(100) COMMENT 'Vehicle Description',
+    "PCVXX" NVARCHAR(50) COMMENT 'Person in Control of Vehicle',
+    "ISDEL" NVARCHAR(1) COMMENT 'Is deleted',
+    "CRTBY" NVARCHAR(100) COMMENT 'Created By',
+    "CRTDT" DATE COMMENT 'Created Date',
+    "CRTTM" TIME COMMENT 'Created Time',
+    "CHNBY" NVARCHAR(100) COMMENT 'Changed By',
+    "CHNDT" DATE COMMENT 'Changed Date',
+    "CHNTM" TIME COMMENT 'Changed Time'
+);

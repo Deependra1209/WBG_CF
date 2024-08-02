@@ -1,0 +1,17 @@
+COLUMN TABLE "INC_T_FREXP"( 
+    "FREID" INTEGER NOT NULL primary key GENERATED ALWAYS AS IDENTITY ( START WITH 1 INCREMENT BY 1) COMMENT 'Unique ID',
+    "INCID" INTEGER COMMENT 'Incident Id',
+    "EQPUD" NVARCHAR(100) COMMENT 'Equipment Used',
+    "IRTES" TIME COMMENT 'Initial Reporting Time to Emergency Services',
+    "WAEVD" SMALLINT COMMENT 'Was the area evacuated?',
+    "DWASD" NVARCHAR(100) COMMENT 'Describe What Was Damaged',
+    "COINC" NVARCHAR(1000) COMMENT 'Cause of Incident',
+    "WIRMT" SMALLINT COMMENT 'Was anyone injured or required medical treatment?',
+    "ISDEL" NVARCHAR(1) COMMENT 'Is deleted',
+    "CRTBY" NVARCHAR(100) COMMENT 'Created By',
+    "CRTDT" DATE COMMENT 'Created Date',
+    "CRTTM" TIME COMMENT 'Created Time',
+    "CHNBY" NVARCHAR(100) COMMENT 'Changed By',
+    "CHNDT" DATE COMMENT 'Changed Date',
+    "CHNTM" TIME COMMENT 'Changed Time'
+);

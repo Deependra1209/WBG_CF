@@ -1,0 +1,37 @@
+PROCEDURE "prCreateUpdateIncidentDetails" (
+    IN INCID INTEGER,         -- Unique id
+    IN CLASS INTEGER,         -- Classification
+    IN OTRMN INTEGER,         -- Were you on official WBG Travel/Mission?
+    IN REPOB INTEGER,         -- Are you reporting on behalf of someone else?
+    IN ORGZN NVARCHAR(50),    -- Organization
+    IN REPPR NVARCHAR(100),   -- Name of person reporting
+    IN INUPI NVARCHAR(100),   -- UPI
+    IN INCVP NVARCHAR(100),   -- VP
+    IN IUNIT NVARCHAR(100),   -- Unit
+    IN INCDT DATE,            -- Date of incident
+    IN INCTM TIME,            -- Time of incident
+    IN INCLC INTEGER,         -- Basic incident details Please select your Location
+    IN CNTIR INTEGER,         -- Basic incident details Country
+    IN INRDT DATE,            -- Date of incident reported
+    IN INRTM TIME,            -- Time of incident reported
+    IN LODES NVARCHAR(1000),  -- Basic incident details Describe your location
+    IN INDES NVARCHAR(5000),  -- Incident Description
+    IN REGNO SMALLINT,        -- Regulatory agencies notified
+    IN WORKC SMALLINT,        -- Workers compensation claim submitted?
+    IN WITBY INTEGER,         -- Witness by
+    IN ISAVE SMALLINT,        -- Save = 1, Submit = 0
+    IN ATTFL INTEGER         -- Attachment flag
+)
+LANGUAGE SQLSCRIPT
+SQL SECURITY INVOKER 
+AS 
+BEGIN 
+    IF :INCID = 0 THEN 
+        INSERT INTO "INC_T_INCDT" ( CLASS, OTRMN, REPOB, ORGZN, REPPR, INUPI, INCVP, IUNIT, INCDT, INCTM, INCLC, CNTIR, INRDT, INRTM, LODES, INDES, REGNO, WORKC, WITBY, ISAVE, INCST, ATTFL, ISDEL, CRTBY, CRTDT, CRTTM) 
+        VALUES ( :CLASS, :OTRMN, :REPOB, :ORGZN, :REPPR, :INUPI, :INCVP, :IUNIT, :INCDT, :INCTM, :INCLC, :CNTIR, :INRDT, :INRTM, :LODES, :INDES, :REGNO, :WORKC, :WITBY, :ISAVE, 1459, :ATTFL, '0', SESSION_USER, CURRENT_DATE, CURRENT_TIME);
+    ELSE
+        UPDATE "INC_T_INCDT" 
+        SET  CLASS = :CLASS, OTRMN = :OTRMN, REPOB = :REPOB, ORGZN = :ORGZN, REPPR = :REPPR, INUPI = :INUPI, INCVP = :INCVP, IUNIT = :IUNIT, INCDT = :INCDT, INCTM = :INCTM, INCLC = :INCLC, CNTIR = :CNTIR, INRDT = :INRDT, INRTM = :INRTM, LODES = :LODES, INDES = :INDES, REGNO = :REGNO, WORKC = :WORKC, WITBY = :WITBY, ISAVE = :ISAVE, ATTFL = :ATTFL, CHNBY = SESSION_USER, CHNDT = CURRENT_DATE, CHNTM = CURRENT_TIME
+        WHERE INCID = :INCID AND ISDEL = '0';
+    END IF;
+END;

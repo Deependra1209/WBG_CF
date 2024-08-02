@@ -1,0 +1,14 @@
+VIEW INC_OHS_FireExplosion AS
+SELECT 
+    FRE.FREID,
+    FRE.INCID,
+    FRE.EQPUD,
+    FRE.IRTES,
+    FRE.WAEVD,
+    FRE.DWASD,
+    FRE.COINC,
+    FRE.WIRMT
+FROM 
+    "INC_T_FREXP" FRE 
+WHERE 
+    FRE.ISDEL = '0';

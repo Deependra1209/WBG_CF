@@ -1,0 +1,17 @@
+COLUMN TABLE "INC_T_OTRMS"( 
+    "OFTID" INTEGER NOT NULL primary key GENERATED ALWAYS AS IDENTITY ( START WITH 1 INCREMENT BY 1) COMMENT 'Unique id',
+    "INCID" INTEGER COMMENT 'Incident Id',
+    "RFTVL" INTEGER COMMENT 'Reason for Travel',
+    "INCLC" NVARCHAR(100) COMMENT 'Location of Incident',
+    "LCDES" NVARCHAR(100) COMMENT 'Description of Location',
+    "LOCIN" NVARCHAR(50) COMMENT 'Location at the Time of Incident / Injury',
+    "ACTTI" NVARCHAR(50) COMMENT 'Activity at Time of Incident',
+    "WIRMT" SMALLINT COMMENT 'Was anyone injured or required medical treatment?',
+    "ISDEL" NVARCHAR(1) COMMENT 'Is deleted',
+    "CRTBY" NVARCHAR(100) COMMENT 'Created By',
+    "CRTDT" DATE COMMENT 'Created Date',
+    "CRTTM" TIME COMMENT 'Created Time',
+    "CHNBY" NVARCHAR(100) COMMENT 'Changed By',
+    "CHNDT" DATE COMMENT 'Changed Date',
+    "CHNTM" TIME COMMENT 'Changed Time'
+);

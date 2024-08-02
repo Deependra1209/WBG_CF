@@ -1,0 +1,13 @@
+COLUMN TABLE "INC_T_RLSTO"( 
+    "RSLID" INTEGER NOT NULL primary key GENERATED ALWAYS AS IDENTITY ( START WITH 1 INCREMENT BY 1) COMMENT 'Unique Id',
+    "ENVID" INTEGER COMMENT 'Environment ID',
+    "INCID" INTEGER COMMENT 'Incident Id',
+    "RLTOI" INTEGER COMMENT 'Released to id',
+    "ISDEL" NVARCHAR(1) COMMENT 'Is deleted',
+    "CRTBY" NVARCHAR(100) COMMENT 'Created By',
+    "CRTDT" DATE COMMENT 'Created Date',
+    "CRTTM" TIME COMMENT 'Created Time',
+    "CHNBY" NVARCHAR(100) COMMENT 'Changed By',
+    "CHNDT" DATE COMMENT 'Changed Date',
+    "CHNTM" TIME COMMENT 'Changed Time'
+);

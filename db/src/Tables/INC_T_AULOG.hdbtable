@@ -1,0 +1,13 @@
+COLUMN TABLE "INC_T_AULOG"( 
+    "AUDID" BIGINT NOT NULL primary key GENERATED ALWAYS AS IDENTITY ( START WITH 1 INCREMENT BY 1) COMMENT 'Unique id',
+    "INCID" INTEGER COMMENT 'Unique refrence/foreign id',
+    "REFID" INTEGER COMMENT 'Unique refrence/foreign id',
+    "RTYPE" NVARCHAR(100) COMMENT 'Type  of Refrence',
+    "SRVNM" NVARCHAR(200) COMMENT 'Service name',
+    "PLOAD" NVARCHAR(5000) COMMENT 'Payload',
+    "VIENM" NVARCHAR(50) COMMENT 'View name',
+    "ISDEL" NVARCHAR(1) COMMENT 'Is Deleted Flag (1=True/0=False)',
+    "CRTBY" NVARCHAR(100) COMMENT 'Created By',
+    "CRTDT" DATE COMMENT 'Created Date',
+    "CRTTM" TIME COMMENT 'Created Time'
+);

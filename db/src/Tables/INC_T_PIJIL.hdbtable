@@ -1,0 +1,19 @@
+COLUMN TABLE "INC_T_PIJIL"( 
+    "PRIID" INTEGER NOT NULL primary key GENERATED ALWAYS AS IDENTITY ( START WITH 1 INCREMENT BY 1) COMMENT 'Unique Id',
+    "INCID" INTEGER COMMENT 'Incident Id',
+    "INJID" INTEGER COMMENT 'Personal injury id',
+    "LTRTQ" INTEGER COMMENT 'Level of Treatment Required',
+    "WTIMF" SMALLINT COMMENT 'Was the injured taken to a medical facility?',
+    "WBBFE" SMALLINT COMMENT 'Was it BBFE? (Blood / Body Fluid Exposure)',
+    "WBSPT" SMALLINT COMMENT 'Was the employee supplied with an BBFE package to take with them to the Emergency Room?',
+    "WHDTE" NVARCHAR(100) COMMENT 'Which hospital did the employee attend?',
+    "TOBBF" INTEGER COMMENT 'Type of BBFE',
+    "OTHER"	NVARCHAR(100)	COMMENT 'Other',
+    "ISDEL" NVARCHAR(1) COMMENT 'Is deleted',
+    "CRTBY" NVARCHAR(100) COMMENT 'Created By',
+    "CRTDT" DATE COMMENT 'Created Date',
+    "CRTTM" TIME COMMENT 'Created Time',
+    "CHNBY" NVARCHAR(100) COMMENT 'Changed By',
+    "CHNDT" DATE COMMENT 'Changed Date',
+    "CHNTM" TIME COMMENT 'Changed Time'
+);
