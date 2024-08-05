@@ -1,0 +1,9 @@
+VIEW INC_OHS_LessonsLearned AS
+SELECT 
+    LLR.LLRID, 
+    LLR.INCID, 
+    LLR.INVID, 
+    LLR.LLDSC
+FROM 
+    "INC_T_LLRND" LLR
+WHERE LLR.ISDEL='0';

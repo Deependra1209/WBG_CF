@@ -63,4 +63,13 @@ service IncidentPortal {
 
     // Delete Chain of Events
     function eddl7wz9zoatww19(XkXwXp4nCf5azs0U  : String) returns String;
+
+    // Delete Corrective Action
+    function d2hhhqmepsgh7g3i(XkXwXp4nCf5azs0U  : String) returns String;
+
+    // Delete Lesson Learn
+    function i5j7kek2aqkevyca(XkXwXp4nCf5azs0U  : String) returns String;
+
+
+    
 } 

@@ -92,7 +92,6 @@ module.exports = cds.service.impl(function (){
                 result = await tx.run(`CALL "prCreateUpdateWitnessDetails"(?,?,?,?,?,?,?)`, [setValue(oReportIncident.witnessdetails[i].WITID),oINCID,null, 
                 setValue(oReportIncident.witnessdetails[i].WITTP), setValue(oReportIncident.witnessdetails[i].WITNM), setValue(oReportIncident.witnessdetails[i].WITPN), 
                 setValue(oReportIncident.witnessdetails[i].WITEM)]);
-                console.log('hahahahahah');
                 console.log(result);
             }
 
@@ -100,7 +99,8 @@ module.exports = cds.service.impl(function (){
             // Environmental
             if(validateField(oEnvironmental.ENVID)){
                 result = await tx.run(`CALL "prCreateUpdateEnvironmental"(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`, [setValue(oEnvironmental.ENVID),oINCID, setValue(oEnvironmental.WESCD), 
-                    setValue(oEnvironmental.PRLOC), setValue(oEnvironmental.DESLO), setValue(oEnvironmental.PRSDC), null,null, 
+                    setValue(oEnvironmental.PRLOC), setValue(oEnvironmental.DESLO), setValue(oEnvironmental.PRSDC),setValue(oEnvironmental.SRTDS),setValue(oEnvironmental.ENDDS),
+                    // null,null
                     setValue(oEnvironmental.WCTTR), setValue(oEnvironmental.TSROS), setValue(oEnvironmental.EQSRD), 
                     setValue(oEnvironmental.UNMNT), setValue(oEnvironmental.ISCON), setValue(oEnvironmental.WCRLS), 
                     setValue(oEnvironmental.WRSCN), setValue(oEnvironmental.WIMRT), setValue(oEnvironmental.CNMSS), setValue(oEnvironmental.ADCOM)]);

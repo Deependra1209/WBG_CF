@@ -1,0 +1,11 @@
+VIEW ChainofEventsLeadingtoInjury AS
+SELECT 
+EVI.EIJID,
+EVI.INCID,
+EVI.PRIID,
+EVI.EVEDS
+
+FROM "INC_T_EVINJ" EVI
+
+WHERE 
+   EVI.ISDEL ='0';

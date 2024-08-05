@@ -345,7 +345,7 @@ module.exports = cds.service.impl(function (){
             }
 
             //Audit log
-            result = await tx.run(`CALL "prCreateAuditLog"(?,?,?,?,?,?)`, [osetValue(PreInvestigation.INCID),setValue(oPreInvestigation.INCID),'pre-Investigation','pre-Investigation',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName']);
+            result = await tx.run(`CALL "prCreateAuditLog"(?,?,?,?,?,?)`, [setValue(PreInvestigation.INCID),setValue(oPreInvestigation.INCID),'pre-Investigation','pre-Investigation',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName']);
             console.log(result);
             //createAuditLog(oINCID,oINCID,'CreateIncidnt','CreateIncident',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName');
 
@@ -608,6 +608,82 @@ module.exports = cds.service.impl(function (){
             console.log(result);
             // //createErrorLog('Delete Chain Of Events', 'DeleteChainOfEvents', JSON.stringify(oInput), error.toString(), 'Incident', 'USERID');
             // console.log(error.toString());
+            if (tx) {
+                await tx.rollback(error); 
+            }
+            return error.toString();
+        }
+    })
+
+    //Delete Corrective Action
+    this.on("d2hhhqmepsgh7g3i", async(req)=>{
+        try{
+            let result;
+            payload = req.data;
+            oInput = JSON.parse(payload.XkXwXp4nCf5azs0U);
+            const oDeleteCorrectiveAction = oInput.DeleteCorrectiveAction ;
+            tx = cds.transaction(req);
+
+            result = await tx.run(`CALL "prDeleteCorrectiveAction"(?,?)`,[oDeleteCorrectiveAction.CRAID,oDeleteCorrectiveAction.INCID])
+            console.log(result);
+
+            //Audit log
+            result = await tx.run(`CALL "prCreateAuditLog"(?,?,?,?,?,?)`, [oDeleteCorrectiveAction.INCID,oDeleteCorrectiveAction.INCID,'DeleteCorrectiveAction','DeleteCorrectiveAction',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName']);
+            console.log(result);
+            //createAuditLog(oINCID,oINCID,'CreateIncidnt','CreateIncident',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName');
+
+            //Summary
+            result = await tx.run(`CALL "prCreateEventSummary"(?,?,?,?,?,?)`, [oDeleteCorrectiveAction.INCID, 0, 0, 'CorrectiveAction', 'DeleteCorrectiveAction', 'Deleted']);
+            console.log(result);
+            //createSummary(oINCID, 0, 0, 'Report Incident', 'Incident Created', 'Created');
+
+            // await tx.commit();
+            return `{ \"Success\":\"Deleted Corrective Action\" , \"Incident Id\":${oDeleteCorrectiveAction.INCID} }`;
+        }
+        catch(error){
+            //Error log
+            tx1 = cds.transaction(req);
+            result = await tx1.run(`CALL "prCreateErrorLog"(?,?,?,?,?,?)`, ['Delete CorrectiveAction', 'DeleteCorrectiveAction', req.data.XkXwXp4nCf5azs0U, error.toString(), 'Incident', 'USERID']);
+            console.log(result);
+
+            if (tx) {
+                await tx.rollback(error); 
+            }
+            return error.toString();
+        }
+    })
+
+    //Delete Lesson Learned
+    this.on("i5j7kek2aqkevyca", async(req)=>{
+        try{
+            let result;
+            payload = req.data;
+            oInput = JSON.parse(payload.XkXwXp4nCf5azs0U);
+            const oDeleteLessonLearned = oInput.DeleteLessonLearned ;
+            tx = cds.transaction(req);
+
+            result = await tx.run(`CALL "prDeleteLessonLearn"(?,?)`,[oDeleteLessonLearned.LLRID,oDeleteLessonLearned.INCID])
+            console.log(result);
+
+            //Audit log
+            result = await tx.run(`CALL "prCreateAuditLog"(?,?,?,?,?,?)`, [oDeleteLessonLearned.INCID,oDeleteLessonLearned.INCID,'DeleteLessonLearned','DeleteLessonLearned',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName']);
+            console.log(result);
+            //createAuditLog(oINCID,oINCID,'CreateIncidnt','CreateIncident',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName');
+
+            //Summary
+            result = await tx.run(`CALL "prCreateEventSummary"(?,?,?,?,?,?)`, [oDeleteLessonLearned.INCID, 0, 0, 'Lesson Learned', 'Delete Lesson Learned', 'Deleted']);
+            console.log(result);
+            //createSummary(oINCID, 0, 0, 'Report Incident', 'Incident Created', 'Created');
+
+            // await tx.commit();
+            return `{ \"Success\":\"Delete Lesson Learned\" , \"Incident Id\":${oDeleteLessonLearned.INCID} }`;
+        }
+        catch(error){
+            //Error log
+            tx1 = cds.transaction(req);
+            result = await tx1.run(`CALL "prCreateErrorLog"(?,?,?,?,?,?)`, ['Delete Lesson Learned', 'DeleteLessonLearned', req.data.XkXwXp4nCf5azs0U, error.toString(), 'Incident', 'USERID']);
+            console.log(result);
+
             if (tx) {
                 await tx.rollback(error); 
             }
