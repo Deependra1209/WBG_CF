@@ -1,4 +1,4 @@
-VIEW ChainofEventsLeadingtoInjury AS
+VIEW INC_OHS_ChainofEventsLeadingtoInjury AS
 SELECT 
 EVI.EIJID,
 EVI.INCID,

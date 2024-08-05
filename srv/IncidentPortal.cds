@@ -15,6 +15,17 @@ service IncidentPortal {
     //Landing Page
     entity zkkoitsf308swxps as select from INC.OHS.LANDINGPAGE;
     entity tomadceqkxui6bzm as select from INC.OHS.SUMMARY;
+    entity aVzaQhemhAbKVwcj as select from INC.OHS.PREINVESTIGATION;
+    entity nkKEGKKXXKqyHYCQ as select from INC.OHS.LINKEDINCIDENTS;
+    entity D3N62mR0E3aS0DBh as select from INC.OHS.CHAINOFEVENTSLEADINGTOINJURY;
+    entity uWYn7PAq9G1D04f5 as select from INC.OHS.INVESTIGATIONDETAILS;
+    entity ZYYN8sO9L6uSEBa7 as select from INC.OHS.INVESTIGATIONTEAM;
+    entity EAVfBn19inj24Bwf as select from INC.OHS.INVESTIGATIONFISHBONE;
+    entity QVBybUrUCna0N8O3 as select from INC.OHS.LESSONSLEARNED;
+    entity Xcink8GKBUpQGmzh as select from INC.OHS.CORRECTIVEACTION;
+    entity YzTD4CGRwMPdd4l7 as select from INC.OHS.REPORTSIGNOFF;
+    entity aKJwsXTBT9VgL7Rn as select from INC.OHS.FOLLOWUP;
+    entity V3MCsbtg9exCq9nI as select from INC.OHS.FOLLOWUPSENDTO;
 
     //Report Incident Tab
     entity ej4myIFssTTENpBx as select from INC.OHS.INCIDENTDETAILS;

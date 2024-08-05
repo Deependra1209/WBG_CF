@@ -120,6 +120,9 @@ context OHS {
         LODES:String(1000);
         SUMMARY : Association to many SUMMARY on SUMMARY.INCID=INCID;
         INCIDENTDETAILS : Association to many INCIDENTDETAILS on INCIDENTDETAILS.INCID=INCID;
+        PREINVESTIGATION : Association to many PREINVESTIGATION on PREINVESTIGATION.INCID=INCID;
+        INVESTIGATIONDETAILS : Association to many INVESTIGATIONDETAILS on INVESTIGATIONDETAILS.INCID=INCID;
+        FOLLOWUP : Association to many FOLLOWUP on FOLLOWUP.INCID=INCID;
     }
 
     @cds.persistence.exists
@@ -134,6 +137,128 @@ context OHS {
         NOTES : String(5000);
         PRFLW : Integer;
 
+    }
+
+    @cds.persistence.exists
+    entity PREINVESTIGATION() {
+        PRIID  : Integer;
+        INCID  : Integer;
+        ISMLC  : Integer;
+        INLOC  : String(100);
+        INJCD  : String(100);
+        IJDEQ  : String(100);
+        KNOHZ  : Integer;
+        HZDES  : String(100);
+        WECON  : String(100);
+        ILEVL  : Integer;
+        ILEVLTXT : String(1000);
+        STAFF  : String(5000);
+        WITSS  : String(5000);
+        SKTCH  : String(5000);
+        PNOTE  : String(5000);
+        ISSVD  : String(1);
+        PICOM  : Integer;
+        CHAINOFEVENTSLEADINGTOINJURY : Association to many CHAINOFEVENTSLEADINGTOINJURY on CHAINOFEVENTSLEADINGTOINJURY.PRIID=PRIID;
+        LINKEDINCIDENTS : Association to many LINKEDINCIDENTS on LINKEDINCIDENTS.PRIID=PRIID;
+    }
+
+    @cds.persistence.exists
+    entity CHAINOFEVENTSLEADINGTOINJURY() {
+        EIJID  : Integer;
+        INCID  : Integer;
+        PRIID  : Integer;
+        EVEDS  : String(5000);
+    }
+
+    @cds.persistence.exists
+    entity LINKEDINCIDENTS() {
+        LINID  : Integer;
+        INCID  : Integer;
+        PRIID  : Integer;
+        LIKID  : Integer;
+        LIKIDTXT:String(1000);
+    }
+
+    @cds.persistence.exists
+    entity INVESTIGATIONDETAILS() {
+        INVID  : Integer;
+        INCID  : Integer;
+        EXESM  : String(5000);
+        INVSM  : String(5000);
+        CONCL  : String(5000);
+        EVONE  : String(5000);
+        EVTWO  : String(5000);
+        EVTHR  : String(5000);
+        RCFAC  : Integer;
+        RCFAC_TXT:String(1000);
+        CATFA  : String(5000);
+        ISSVD  : String(1);
+        CLOBY  : String(30);
+        CLODT  : Date;
+        CLOTM  : Time;
+        INVST  : Integer;
+        INVST_TXT:String(1000);
+        INVESTIGATIONTEAM : Association to many INVESTIGATIONTEAM on INVESTIGATIONTEAM.INVID=INVID;
+        INVESTIGATIONFISHBONE : Association to many INVESTIGATIONFISHBONE on INVESTIGATIONFISHBONE.INVID=INVID;
+        LESSONSLEARNED : Association to many LESSONSLEARNED on LESSONSLEARNED.INVID=INVID;
+        REPORTSIGNOFF : Association to many REPORTSIGNOFF on REPORTSIGNOFF.INVID=INVID;
+        CORRECTIVEACTION : Association to many CORRECTIVEACTION on CORRECTIVEACTION.INVID=INVID;
+    }
+
+    @cds.persistence.exists
+    entity INVESTIGATIONTEAM() {
+        ITMID  : Integer;
+        INCID  : Integer;
+        INVID  : Integer;
+        EMPID  : String(30);
+        TITLE  : Integer;
+        TITLE_TXT:String(1000);
+    }
+
+    @cds.persistence.exists
+    entity INVESTIGATIONFISHBONE() {
+        FISID  : Integer;
+        INVID  : Integer;
+        INCID  : Integer;
+        UNQID  : Integer;
+        UNQID_TXT:String(100);
+    }
+
+    @cds.persistence.exists
+    entity LESSONSLEARNED() {
+        LLRID  : Integer;
+        INCID  : Integer;
+        INVID  : Integer;
+        LLDSC  : String(5000);
+    }
+
+    @cds.persistence.exists
+    entity REPORTSIGNOFF() {
+        SIGID  : Integer;
+        INCID  : Integer;
+        INVID  : Integer;
+        RSIGN  : String(5000);   // CLOB
+        SFONT  : String(50);
+        SOLAG  : String(1);
+        NOTES  : String(1000);
+        EMPID  : String(30);
+        SIGNM : String(250);
+    }
+
+    @cds.persistence.exists
+    entity FOLLOWUP() {
+        FUPID  : Integer;
+        INCID  : Integer;
+        NOTES  : String(5000);
+        FOLLOWUPSENDTO : Association to many FOLLOWUPSENDTO on FOLLOWUPSENDTO.FUPID=FUPID;
+    }
+
+    @cds.persistence.exists
+    entity FOLLOWUPSENDTO() {
+        FSTID  : Integer;
+        FUPID  : Integer;
+        EMPID  : String(30);
+        FSTNM : String(250);
     }
 
 

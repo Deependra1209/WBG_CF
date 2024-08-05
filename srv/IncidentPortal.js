@@ -345,7 +345,7 @@ module.exports = cds.service.impl(function (){
             }
 
             //Audit log
-            result = await tx.run(`CALL "prCreateAuditLog"(?,?,?,?,?,?)`, [setValue(PreInvestigation.INCID),setValue(oPreInvestigation.INCID),'pre-Investigation','pre-Investigation',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName']);
+            result = await tx.run(`CALL "prCreateAuditLog"(?,?,?,?,?,?)`, [setValue(oPreInvestigation.INCID),setValue(oPreInvestigation.INCID),'pre-Investigation','pre-Investigation',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName']);
             console.log(result);
             //createAuditLog(oINCID,oINCID,'CreateIncidnt','CreateIncident',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName');
 
@@ -383,7 +383,7 @@ module.exports = cds.service.impl(function (){
             tx = cds.transaction(req);
             if(validateField(oInvestigationDetails.INVID)){
                 // Procedure for Investigation Details
-	            result = await tx.run(`Call "prCreateUpdateInvestigation"(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,[oInvestigationDetails.INVID, oInvestigationDetails.INCID, oInvestigationDetails.EXESM, oInvestigationDetails.INVSM, oInvestigationDetails.CONCL, oInvestigationDetails.EVONE, oInvestigationDetails.EVTWO, oInvestigationDetails.EVTHR, oInvestigationDetails.RCFAC, oInvestigationDetails.CATFA, oInvestigationDetails.ISSVD, oInvestigationDetails.CLOBY, oInvestigationDetails.CLODT, oInvestigationDetails.CLOTM, oInvestigationDetails.INVST]);
+	            result = await tx.run(`Call "prCreateUpdateInvestigation"(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,[setValue(oInvestigationDetails.INVID), setValue(oInvestigationDetails.INCID), setValue(oInvestigationDetails.EXESM), setValue(oInvestigationDetails.INVSM), setValue(oInvestigationDetails.CONCL), setValue(oInvestigationDetails.EVONE), setValue(oInvestigationDetails.EVTWO), setValue(oInvestigationDetails.EVTHR), setValue(oInvestigationDetails.RCFAC), setValue(oInvestigationDetails.CATFA), setValue(oInvestigationDetails.ISSVD), setValue(oInvestigationDetails.CLOBY), setValue(oInvestigationDetails.CLODT), setValue(oInvestigationDetails.CLOTM), setValue(oInvestigationDetails.INVST)]);
 	            console.log(result);
 
                 const oINVID = oInvestigationDetails.INVID == 0 ? await getSequenceNumber("INC_T_INVST","INVID") : oInvestigationDetails.INVID;
@@ -391,7 +391,7 @@ module.exports = cds.service.impl(function (){
 	            for(var i = 0; i < oInvestigationDetails.InvestigationTeam.length; i++)
 	            {
 	            	// Procedure for Investigation Team
-	            	result = await tx.run(`Call "prCreateUpdateInvestigationTeam"(?,?,?,?,?)`,[oInvestigationDetails.InvestigationTeam[i].ITMID, oInvestigationDetails.INCID, oINVID, oInvestigationDetails.InvestigationTeam[i].EMPID, oInvestigationDetails.InvestigationTeam[i].TITLE]);
+	            	result = await tx.run(`Call "prCreateUpdateInvestigationTeam"(?,?,?,?,?)`,[setValue(oInvestigationDetails.InvestigationTeam[i].ITMID), setValue(oInvestigationDetails.INCID), oINVID, setValue(oInvestigationDetails.InvestigationTeam[i].EMPID), setValue(oInvestigationDetails.InvestigationTeam[i].TITLE)]);
 	            	console.log(result);
 	            }
             
@@ -399,32 +399,32 @@ module.exports = cds.service.impl(function (){
 	            for(var i = 0; i < oInvestigationDetails.Fishbone.length; i++)
 	            {
 	            	// Procedure for Investigation Fishbone
-	            	result = await tx.run(`Call "prCreateUpdateFishbone"(?,?,?,?)`,[oInvestigationDetails.Fishbone[i].FISID, oINVID, oInvestigationDetails.INCID, oInvestigationDetails.Fishbone[i].UNQID]);
+	            	result = await tx.run(`Call "prCreateUpdateFishbone"(?,?,?,?)`,[setValue(oInvestigationDetails.Fishbone[i].FISID), oINVID, setValue(oInvestigationDetails.INCID), setValue(oInvestigationDetails.Fishbone[i].UNQID)]);
 	            	console.log(result);
 	            }
             
 	            for(var i = 0; i < oInvestigationDetails.LessonsLearned.length; i++)
 	            {
 	            	// Procedure for Lessons Learned
-	            	result = await tx.run(`Call "prCreateUpdateLessonsLearned"(?,?,?,?)`,[oInvestigationDetails.LessonsLearned[i].LLRID,oInvestigationDetails.INCID, oINVID, oInvestigationDetails.LessonsLearned[i].LLDSC]);
+	            	result = await tx.run(`Call "prCreateUpdateLessonsLearned"(?,?,?,?)`,[setValue(oInvestigationDetails.LessonsLearned[i].LLRID),setValue(oInvestigationDetails.INCID, oINVID), setValue(oInvestigationDetails.LessonsLearned[i].LLDSC)]);
 	            	console.log(result);
 	            }
             
 	            for(var i = 0; i < oInvestigationDetails.CorrectiveAction.length; i++)
 	            {
 	            	// Procedure for Corrective Action
-	            	result = await tx.run(`Call "prCreateUpdateCorrectiveAction"(?,?,?,?,?,?,?,?,?,?,?,?,?)`,[oInvestigationDetails.CorrectiveAction[i].CRAID, oINVID, oInvestigationDetails.INCID, oInvestigationDetails.CorrectiveAction[i].CAUSE, oInvestigationDetails.CorrectiveAction[i].CADSC, oInvestigationDetails.CorrectiveAction[i].CATEG, oInvestigationDetails.CorrectiveAction[i].CTYPE, oInvestigationDetails.CorrectiveAction[i].ASSID, oInvestigationDetails.CorrectiveAction[i].DUEDT, oInvestigationDetails.CorrectiveAction[i].CASTS, oInvestigationDetails.CorrectiveAction[i].CNOTE, oInvestigationDetails.CorrectiveAction[i].COMDT, oInvestigationDetails.CorrectiveAction[i].RASNT]);
+	            	result = await tx.run(`Call "prCreateUpdateCorrectiveAction"(?,?,?,?,?,?,?,?,?,?,?,?,?)`,[setValue(oInvestigationDetails.CorrectiveAction[i].CRAID), oINVID, setValue(oInvestigationDetails.INCID), setValue(oInvestigationDetails.CorrectiveAction[i].CAUSE), setValue(oInvestigationDetails.CorrectiveAction[i].CADSC), setValue(oInvestigationDetails.CorrectiveAction[i].CATEG), setValue(oInvestigationDetails.CorrectiveAction[i].CTYPE), setValue(oInvestigationDetails.CorrectiveAction[i].ASSID), setValue(oInvestigationDetails.CorrectiveAction[i].DUEDT), setValue(oInvestigationDetails.CorrectiveAction[i].CASTS), setValue(oInvestigationDetails.CorrectiveAction[i].CNOTE), setValue(oInvestigationDetails.CorrectiveAction[i].COMDT), setValue(oInvestigationDetails.CorrectiveAction[i].RASNT)]);
 	            	console.log(result);
                 
 	            }
 
             //Audit log
-            result = await tx.run(`CALL "prCreateAuditLog"(?,?,?,?,?,?)`, [oInvestigationDetails.INCID,oInvestigationDetails.INCID,'Investigation','Investigation',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName']);
+            result = await tx.run(`CALL "prCreateAuditLog"(?,?,?,?,?,?)`, [setValue(oInvestigationDetails.INCID),setValue(oInvestigationDetails.INCID),'Investigation','Investigation',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName']);
             console.log(result);
             //createAuditLog(oINCID,oINCID,'CreateIncidnt','CreateIncident',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName');
 
             //Summary
-            result = await tx.run(`CALL "prCreateEventSummary"(?,?,?,?,?,?)`, [oInvestigationDetails.INCID, 0, 0, 'Investigation', 'Investigation', 'Created']);
+            result = await tx.run(`CALL "prCreateEventSummary"(?,?,?,?,?,?)`, [setValue(oInvestigationDetails.INCID), 0, 0, 'Investigation', 'Investigation', 'Created']);
             console.log(result);
             //createSummary(oINCID, 0, 0, 'Report Incident', 'Incident Created', 'Created');
 
@@ -455,16 +455,16 @@ module.exports = cds.service.impl(function (){
             const oReportSignOff = oInput.ReportSignOff;
             tx = cds.transaction(req);
             if(validateField(oReportSignOff.SIGID)){
-                result = await tx.run(`Call "prCreateUpdateSignOff"(?,?,?,?,?,?,?,?)`,[oReportSignOff.SIGID, oReportSignOff.INCID, oReportSignOff.INVID, oReportSignOff.RSIGN, oReportSignOff.SFONT, oReportSignOff.SOLAG, oReportSignOff.NOTES, oReportSignOff.EMPID])
+                result = await tx.run(`Call "prCreateUpdateSignOff"(?,?,?,?,?,?,?,?)`,[setValue(oReportSignOff.SIGID), setValue(oReportSignOff.INCID), setValue(oReportSignOff.INVID), setValue(oReportSignOff.RSIGN), setValue(oReportSignOff.SFONT), setValue(oReportSignOff.SOLAG), setValue(oReportSignOff.NOTES), setValue(oReportSignOff.EMPID)])
                 console.log(result);
 
                 //Audit log
-                result = await tx.run(`CALL "prCreateAuditLog"(?,?,?,?,?,?)`, [oReportSignOff.INCID,oReportSignOff.INCID,'Report Sign Off','Report Sign Off',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName']);
+                result = await tx.run(`CALL "prCreateAuditLog"(?,?,?,?,?,?)`, [setValue(oReportSignOff.INCID),setValue(oReportSignOff.INCID),'Report Sign Off','Report Sign Off',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName']);
                 console.log(result);
                 //createAuditLog(oINCID,oINCID,'CreateIncidnt','CreateIncident',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName');
 
                 //Summary
-                result = await tx.run(`CALL "prCreateEventSummary"(?,?,?,?,?,?)`, [oReportSignOff.INCID, 0, 0, 'Report Sign Off', 'Report Sign Off', 'Created']);
+                result = await tx.run(`CALL "prCreateEventSummary"(?,?,?,?,?,?)`, [setValue(oReportSignOff.INCID), 0, 0, 'Report Sign Off', 'Report Sign Off', 'Created']);
                 console.log(result);
                 //createSummary(oINCID, 0, 0, 'Report Incident', 'Incident Created', 'Created');
 
@@ -495,24 +495,24 @@ module.exports = cds.service.impl(function (){
             const oFollowUpDetails = oInput.FollowUpDetails;
             tx = cds.transaction(req);
             if(validateField(oFollowUpDetails.FUPID)){
-                result = await tx.run(`CALL "prCreateUpdateFollowUp"(?,?,?)`,[oFollowUpDetails.FUPID,oFollowUpDetails.INCID,oFollowUpDetails.NOTES])
+                result = await tx.run(`CALL "prCreateUpdateFollowUp"(?,?,?)`,[setValue(oFollowUpDetails.FUPID),setValue(oFollowUpDetails.INCID),setValue(oFollowUpDetails.NOTES)])
                 console.log(result);
                 
                 const oFUPID = oFollowUpDetails.FUPID == 0 ? await getSequenceNumber("INC_T_FOLUP","FUPID") : oFollowUpDetails.FUPID;
 
 	            for(var i = 0; i < oFollowUpDetails.SendTo.length; i++)
 	            {
-	            	result = await tx.run(`CALL "prCreateUpdateFollowUpSendTo"(?,?,?)`,[oFollowUpDetails.SendTo[i].FSTID,oFUPID,oFollowUpDetails.SendTo[i].EMPID])
+	            	result = await tx.run(`CALL "prCreateUpdateFollowUpSendTo"(?,?,?)`,[setValue(oFollowUpDetails.SendTo[i].FSTID),oFUPID,setValue(oFollowUpDetails.SendTo[i].EMPID)])
                         	console.log(result);
 	            }
 
                 //Audit log
-                result = await tx.run(`CALL "prCreateAuditLog"(?,?,?,?,?,?)`, [oFollowUpDetails.INCID,oFollowUpDetails.INCID,'FollowUp','FollowUp',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName']);
+                result = await tx.run(`CALL "prCreateAuditLog"(?,?,?,?,?,?)`, [setValue(oFollowUpDetails.INCID),setValue(oFollowUpDetails.INCID),'FollowUp','FollowUp',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName']);
                 console.log(result);
                 //createAuditLog(oINCID,oINCID,'CreateIncidnt','CreateIncident',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName');
 
                 //Summary
-                result = await tx.run(`CALL "prCreateEventSummary"(?,?,?,?,?,?)`, [oFollowUpDetails.INCID, 0, 0, 'FollowUp', 'FollowUp', 'Created']);
+                result = await tx.run(`CALL "prCreateEventSummary"(?,?,?,?,?,?)`, [setValue(oFollowUpDetails.INCID), 0, 0, 'FollowUp', 'FollowUp', 'Created']);
                 console.log(result);
                 //createSummary(oINCID, 0, 0, 'Report Incident', 'Incident Created', 'Created');
 
@@ -543,16 +543,16 @@ module.exports = cds.service.impl(function (){
             const oDeleteInvestigationTeam = oInput.DeleteInvestigationTeam ;
             tx = cds.transaction(req);
 
-            result = await tx.run(`CALL "prDeleteInvestigationTeam"(?,?)`,[oDeleteInvestigationTeam.ITMID,oDeleteInvestigationTeam.INCID])
+            result = await tx.run(`CALL "prDeleteInvestigationTeam"(?,?)`,[setValue(oDeleteInvestigationTeam.ITMID),setValue(oDeleteInvestigationTeam.INCID)])
             console.log(result);
 
             //Audit log
-            result = await tx.run(`CALL "prCreateAuditLog"(?,?,?,?,?,?)`, [oDeleteInvestigationTeam.INCID,oDeleteInvestigationTeam.INCID,'DeleteInvestigationTeam','DeleteInvestigationTeam',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName']);
+            result = await tx.run(`CALL "prCreateAuditLog"(?,?,?,?,?,?)`, [setValue(oDeleteInvestigationTeam.INCID),setValue(oDeleteInvestigationTeam.INCID),'DeleteInvestigationTeam','DeleteInvestigationTeam',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName']);
             console.log(result);
             //createAuditLog(oINCID,oINCID,'CreateIncidnt','CreateIncident',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName');
 
             //Summary
-            result = await tx.run(`CALL "prCreateEventSummary"(?,?,?,?,?,?)`, [oDeleteInvestigationTeam.INCID, 0, 0, 'InvestigationTeam', 'DeleteInvestigationTeam', 'Deleted']);
+            result = await tx.run(`CALL "prCreateEventSummary"(?,?,?,?,?,?)`, [setValue(oDeleteInvestigationTeam.INCID), 0, 0, 'InvestigationTeam', 'DeleteInvestigationTeam', 'Deleted']);
             console.log(result);
             //createSummary(oINCID, 0, 0, 'Report Incident', 'Incident Created', 'Created');
 
@@ -585,16 +585,16 @@ module.exports = cds.service.impl(function (){
             const oDeleteChainOfEvents = oInput.DeleteChainOfEvents ;
             tx = cds.transaction(req);
 
-            result = await tx.run(`CALL "prDeleteChainOfEvents"(?,?)`,[oDeleteChainOfEvents.EIJID,oDeleteChainOfEvents.INCID])
+            result = await tx.run(`CALL "prDeleteChainOfEvents"(?,?)`,[setValue(oDeleteChainOfEvents.EIJID),setValue(oDeleteChainOfEvents.INCID)])
             console.log(result);
 
             //Audit log
-            result = await tx.run(`CALL "prCreateAuditLog"(?,?,?,?,?,?)`, [oDeleteChainOfEvents.INCID,oDeleteChainOfEvents.INCID,'DeleteChainofEvent','DeleteChainofEvent',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName']);
+            result = await tx.run(`CALL "prCreateAuditLog"(?,?,?,?,?,?)`, [setValue(oDeleteChainOfEvents.INCID),setValue(oDeleteChainOfEvents.INCID),'DeleteChainofEvent','DeleteChainofEvent',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName']);
             console.log(result);
             //createAuditLog(oINCID,oINCID,'CreateIncidnt','CreateIncident',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName');
 
             //Summary
-            result = await tx.run(`CALL "prCreateEventSummary"(?,?,?,?,?,?)`, [oDeleteChainOfEvents.INCID, 0, 0, 'InvestigationTeam', 'DeleteChainofEvent', 'Deleted']);
+            result = await tx.run(`CALL "prCreateEventSummary"(?,?,?,?,?,?)`, [setValue(oDeleteChainOfEvents.INCID), 0, 0, 'InvestigationTeam', 'DeleteChainofEvent', 'Deleted']);
             console.log(result);
             //createSummary(oINCID, 0, 0, 'Report Incident', 'Incident Created', 'Created');
 
@@ -624,16 +624,16 @@ module.exports = cds.service.impl(function (){
             const oDeleteCorrectiveAction = oInput.DeleteCorrectiveAction ;
             tx = cds.transaction(req);
 
-            result = await tx.run(`CALL "prDeleteCorrectiveAction"(?,?)`,[oDeleteCorrectiveAction.CRAID,oDeleteCorrectiveAction.INCID])
+            result = await tx.run(`CALL "prDeleteCorrectiveAction"(?,?)`,[setValue(oDeleteCorrectiveAction.CRAID),setValue(oDeleteCorrectiveAction.INCID)])
             console.log(result);
 
             //Audit log
-            result = await tx.run(`CALL "prCreateAuditLog"(?,?,?,?,?,?)`, [oDeleteCorrectiveAction.INCID,oDeleteCorrectiveAction.INCID,'DeleteCorrectiveAction','DeleteCorrectiveAction',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName']);
+            result = await tx.run(`CALL "prCreateAuditLog"(?,?,?,?,?,?)`, [setValue(oDeleteCorrectiveAction.INCID),setValue(oDeleteCorrectiveAction.INCID),'DeleteCorrectiveAction','DeleteCorrectiveAction',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName']);
             console.log(result);
             //createAuditLog(oINCID,oINCID,'CreateIncidnt','CreateIncident',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName');
 
             //Summary
-            result = await tx.run(`CALL "prCreateEventSummary"(?,?,?,?,?,?)`, [oDeleteCorrectiveAction.INCID, 0, 0, 'CorrectiveAction', 'DeleteCorrectiveAction', 'Deleted']);
+            result = await tx.run(`CALL "prCreateEventSummary"(?,?,?,?,?,?)`, [setValue(oDeleteCorrectiveAction.INCID), 0, 0, 'CorrectiveAction', 'DeleteCorrectiveAction', 'Deleted']);
             console.log(result);
             //createSummary(oINCID, 0, 0, 'Report Incident', 'Incident Created', 'Created');
 
@@ -662,16 +662,16 @@ module.exports = cds.service.impl(function (){
             const oDeleteLessonLearned = oInput.DeleteLessonLearned ;
             tx = cds.transaction(req);
 
-            result = await tx.run(`CALL "prDeleteLessonLearn"(?,?)`,[oDeleteLessonLearned.LLRID,oDeleteLessonLearned.INCID])
+            result = await tx.run(`CALL "prDeleteLessonLearn"(?,?)`,[setValue(oDeleteLessonLearned.LLRID),setValue(oDeleteLessonLearned.INCID)])
             console.log(result);
 
             //Audit log
-            result = await tx.run(`CALL "prCreateAuditLog"(?,?,?,?,?,?)`, [oDeleteLessonLearned.INCID,oDeleteLessonLearned.INCID,'DeleteLessonLearned','DeleteLessonLearned',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName']);
+            result = await tx.run(`CALL "prCreateAuditLog"(?,?,?,?,?,?)`, [setValue(oDeleteLessonLearned.INCID),setValue(oDeleteLessonLearned.INCID),'DeleteLessonLearned','DeleteLessonLearned',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName']);
             console.log(result);
             //createAuditLog(oINCID,oINCID,'CreateIncidnt','CreateIncident',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName');
 
             //Summary
-            result = await tx.run(`CALL "prCreateEventSummary"(?,?,?,?,?,?)`, [oDeleteLessonLearned.INCID, 0, 0, 'Lesson Learned', 'Delete Lesson Learned', 'Deleted']);
+            result = await tx.run(`CALL "prCreateEventSummary"(?,?,?,?,?,?)`, [setValue(oDeleteLessonLearned.INCID), 0, 0, 'Lesson Learned', 'Delete Lesson Learned', 'Deleted']);
             console.log(result);
             //createSummary(oINCID, 0, 0, 'Report Incident', 'Incident Created', 'Created');
 
