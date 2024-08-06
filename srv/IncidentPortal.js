@@ -326,7 +326,7 @@ module.exports = cds.service.impl(function (){
             setValue(oPreInvestigation.ISMLC), setValue(oPreInvestigation.INLOC), setValue(oPreInvestigation.INJCD), setValue(oPreInvestigation.IJDEQ), setValue(oPreInvestigation.KNOHZ), setValue(oPreInvestigation.HZDES), 
             setValue(oPreInvestigation.WECON), setValue(oPreInvestigation.ILEVL), setValue(oPreInvestigation.STAFF), setValue(oPreInvestigation.WITSS), setValue(oPreInvestigation.SKTCH), setValue(oPreInvestigation.PNOTE), 
             setValue(oPreInvestigation.ISSVD), setValue(oPreInvestigation.PICOM)]);
-            console.log(result);
+            console.log(result); 
             
             const oPRIID = oPreInvestigation.PRIID == 0 ? await getSequenceNumber("INC_T_PRINV","PRIID") : oPreInvestigation.PRIID;
 
@@ -493,7 +493,7 @@ module.exports = cds.service.impl(function (){
             payload = req.data;
             oInput = JSON.parse(payload.XkXwXp4nCf5azs0U);
             const oFollowUpDetails = oInput.FollowUpDetails;
-            tx = cds.transaction(req);
+            tx = cds.transaction(req); 
             if(validateField(oFollowUpDetails.FUPID)){
                 result = await tx.run(`CALL "prCreateUpdateFollowUp"(?,?,?)`,[setValue(oFollowUpDetails.FUPID),setValue(oFollowUpDetails.INCID),setValue(oFollowUpDetails.NOTES)])
                 console.log(result);

@@ -123,6 +123,7 @@ context OHS {
         PREINVESTIGATION : Association to many PREINVESTIGATION on PREINVESTIGATION.INCID=INCID;
         INVESTIGATIONDETAILS : Association to many INVESTIGATIONDETAILS on INVESTIGATIONDETAILS.INCID=INCID;
         FOLLOWUP : Association to many FOLLOWUP on FOLLOWUP.INCID=INCID;
+        ATTACHMENTS : Association to many ATTACHMENTS on ATTACHMENTS.INCID=INCID;
     }
 
     @cds.persistence.exists
@@ -141,7 +142,7 @@ context OHS {
 
     @cds.persistence.exists
     entity PREINVESTIGATION() {
-        PRIID  : Integer;
+        key PRIID  : Integer;
         INCID  : Integer;
         ISMLC  : Integer;
         INLOC  : String(100);
@@ -158,13 +159,13 @@ context OHS {
         PNOTE  : String(5000);
         ISSVD  : String(1);
         PICOM  : Integer;
-        CHAINOFEVENTSLEADINGTOINJURY : Association to many CHAINOFEVENTSLEADINGTOINJURY on CHAINOFEVENTSLEADINGTOINJURY.PRIID=PRIID;
+        CHAINOFEVENT : Association to many CHAINOFEVENT on CHAINOFEVENT.PRIID=PRIID;
         LINKEDINCIDENTS : Association to many LINKEDINCIDENTS on LINKEDINCIDENTS.PRIID=PRIID;
     }
 
     @cds.persistence.exists
-    entity CHAINOFEVENTSLEADINGTOINJURY() {
-        EIJID  : Integer;
+    entity CHAINOFEVENT() {
+        key EIJID  : Integer;
         INCID  : Integer;
         PRIID  : Integer;
         EVEDS  : String(5000);
@@ -172,7 +173,7 @@ context OHS {
 
     @cds.persistence.exists
     entity LINKEDINCIDENTS() {
-        LINID  : Integer;
+        key LINID  : Integer;
         INCID  : Integer;
         PRIID  : Integer;
         LIKID  : Integer;
@@ -181,7 +182,7 @@ context OHS {
 
     @cds.persistence.exists
     entity INVESTIGATIONDETAILS() {
-        INVID  : Integer;
+        key INVID  : Integer;
         INCID  : Integer;
         EXESM  : String(5000);
         INVSM  : String(5000);
@@ -207,7 +208,7 @@ context OHS {
 
     @cds.persistence.exists
     entity INVESTIGATIONTEAM() {
-        ITMID  : Integer;
+        key ITMID  : Integer;
         INCID  : Integer;
         INVID  : Integer;
         EMPID  : String(30);
@@ -217,7 +218,7 @@ context OHS {
 
     @cds.persistence.exists
     entity INVESTIGATIONFISHBONE() {
-        FISID  : Integer;
+        key FISID  : Integer;
         INVID  : Integer;
         INCID  : Integer;
         UNQID  : Integer;
@@ -226,7 +227,7 @@ context OHS {
 
     @cds.persistence.exists
     entity LESSONSLEARNED() {
-        LLRID  : Integer;
+        key LLRID  : Integer;
         INCID  : Integer;
         INVID  : Integer;
         LLDSC  : String(5000);
@@ -234,7 +235,7 @@ context OHS {
 
     @cds.persistence.exists
     entity REPORTSIGNOFF() {
-        SIGID  : Integer;
+        key SIGID  : Integer;
         INCID  : Integer;
         INVID  : Integer;
         RSIGN  : String(5000);   // CLOB
@@ -247,7 +248,7 @@ context OHS {
 
     @cds.persistence.exists
     entity FOLLOWUP() {
-        FUPID  : Integer;
+        key FUPID  : Integer;
         INCID  : Integer;
         NOTES  : String(5000);
         FOLLOWUPSENDTO : Association to many FOLLOWUPSENDTO on FOLLOWUPSENDTO.FUPID=FUPID;
@@ -255,7 +256,7 @@ context OHS {
 
     @cds.persistence.exists
     entity FOLLOWUPSENDTO() {
-        FSTID  : Integer;
+        key FSTID  : Integer;
         FUPID  : Integer;
         EMPID  : String(30);
         FSTNM : String(250);
@@ -294,6 +295,9 @@ context OHS {
             INVFL : Integer;
             SNGFL : Integer;
             ATTFL : Integer;
+            CLASSTXT : String(1000);
+            INCTP  : String(1000);
+            INCTPTXT : String(5000);
             INCIDENTTYPE : Association to many INCIDENTTYPE on INCIDENTTYPE.INCID=INCID;
             DETAILSOFINJURED : Association to many DETAILSOFINJURED on DETAILSOFINJURED.INCID=INCID;
             WITNESSDETAILS : Association to many WITNESSDETAILS on WITNESSDETAILS.INCID=INCID;
@@ -390,8 +394,8 @@ context OHS {
             PRLOC_TXT:String(1000);
             DESLO : String(1000);
             PRSDC : String(5000);
-            SRTDS : DateTime;  // Use DateTime for TIMESTAMP
-            ENDDS : DateTime;  // Use DateTime for TIMESTAMP
+            SRTDS : String(100);  // Use DateTime for TIMESTAMP
+            ENDDS : String(100);  // Use DateTime for TIMESTAMP
             WCTTR : String(100);
             TSROS : Integer;  // SmallInteger as Integer
             TSROS_TXT:String(1000);

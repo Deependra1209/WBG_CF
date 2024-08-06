@@ -14,12 +14,11 @@ BEGIN
         VALUES (:INCID, :PRIID, :EVEDS, '0', SESSION_USER, CURRENT_DATE, CURRENT_TIME);
     ELSE
         UPDATE INC_T_EVINJ
-        SET INCID = :INCID,
-            PRIID = :PRIID,
+        SET 
             EVEDS = :EVEDS,
             CHNBY = SESSION_USER,
             CHNDT = CURRENT_DATE,
             CHNTM = CURRENT_TIME
-        WHERE EIJID = :EIJID AND ISDEL = '0';
+        WHERE EIJID = :EIJID AND INCID = :INCID AND PRIID = :PRIID AND ISDEL = '0';
     END IF;
 END;

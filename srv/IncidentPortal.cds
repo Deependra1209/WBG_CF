@@ -17,7 +17,7 @@ service IncidentPortal {
     entity tomadceqkxui6bzm as select from INC.OHS.SUMMARY;
     entity aVzaQhemhAbKVwcj as select from INC.OHS.PREINVESTIGATION;
     entity nkKEGKKXXKqyHYCQ as select from INC.OHS.LINKEDINCIDENTS;
-    entity D3N62mR0E3aS0DBh as select from INC.OHS.CHAINOFEVENTSLEADINGTOINJURY;
+    entity D3N62mR0E3aS0DBh as select from INC.OHS.CHAINOFEVENT;
     entity uWYn7PAq9G1D04f5 as select from INC.OHS.INVESTIGATIONDETAILS;
     entity ZYYN8sO9L6uSEBa7 as select from INC.OHS.INVESTIGATIONTEAM;
     entity EAVfBn19inj24Bwf as select from INC.OHS.INVESTIGATIONFISHBONE;
