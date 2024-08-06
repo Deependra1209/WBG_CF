@@ -1,0 +1,6 @@
+VIEW INC_OHS_LinkedIncidentData AS
+SELECT 
+    INC.INCID,INC.INCNM 
+    FROM "INC_T_INCDT" INC 
+WHERE 
+    INC.ISDEL = '0' AND INC.ISAVE = '0';

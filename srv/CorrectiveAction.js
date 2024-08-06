@@ -59,7 +59,7 @@ module.exports = cds.service.impl(function (){
             //Main post call Corrective Action
             if(validateField(oCloseCA.CRAID)){
  
-            result = await tx.run(`CALL "prUpdateCloseCA"(?,?,?)`, [setValue(oCloseCA.CRAID), setValue(oCloseCA.INCID), setValue(oCloseCA.CASTS)]);
+            result = await tx.run(`CALL "prUpdateCloseCA"(?,?,?,?,?)`, [setValue(oCloseCA.CRAID), setValue(oCloseCA.INCID), setValue(oCloseCA.CASTS),setValue(oCloseCA.CNOTE),setValue(oCloseCA.COMDT) ]);
             console.log(result);
             
             

@@ -169,7 +169,7 @@ module.exports = cds.service.impl(function (){
 
             //Summary
             result = await tx.run(`CALL "prCreateEventSummary"(?,?,?,?,?,?)`, [oINCID, 0, 0, 'Report Incident', 'Incident Updated', 'Updated']);
-            console.log(result);
+            console.log(result);                                               //INCID, PRFLW, ISRED, SECTN, DETLS, EVDES
             //createSummary(oINCID, 0, 0, 'Report Incident', 'Incident Created', 'Created');
             returnObj={};
             
@@ -214,12 +214,15 @@ module.exports = cds.service.impl(function (){
             //createAuditLog(oINCID,oINCID,'CreateIncidnt','CreateIncident',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName');
 
             //Summary
-            result = await tx.run(`CALL "prCreateEventSummary"(?,?,?,?,?,?)`, [setValue(oDeleteBodyPart.INCID), 0, 0, 'Delete BodyPart', 'Delete BodyPart', 'Deleted']);
-            console.log(result);
-            //createSummary(oINCID, 0, 0, 'Report Incident', 'Incident Created', 'Created');
+            //result = await tx.run(`CALL "prCreateEventSummary"(?,?,?,?,?,?)`, [setValue(oDeleteBodyPart.INCID), 0, 0, 'Delete BodyPart', 'Delete BodyPart', 'Deleted']);
+            //console.log(result);
+            returnObj = {
+                "Success":"Body part deleted",
+                "Incident Id":oDeleteBodyPart.INCID
+            }
 
-            // await tx.commit();
-            return `{ \"Success\":\"Deleted Body Part\" , \"Incident Id\":${oDeleteBodyPart.INCID} }`;
+            
+            return JSON.stringify(returnObj);
         }
         catch(error){
             //Error log
@@ -350,7 +353,7 @@ module.exports = cds.service.impl(function (){
             //createAuditLog(oINCID,oINCID,'CreateIncidnt','CreateIncident',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName');
 
             //Summary
-            result = await tx.run(`CALL "prCreateEventSummary"(?,?,?,?,?,?)`, [setValue(oPreInvestigation.INCID), 0, 0, 'pre-Investigation', 'pre-Investigation', 'Created']);
+            result = await tx.run(`CALL "prCreateEventSummary"(?,?,?,?,?,?)`, [setValue(oPreInvestigation.INCID), 0, 0, 'pre-Investigation', 'pre-Investigation', oPreInvestigation.PRIID == 0 ? 'Created' : 'Updated']);
             console.log(result);
             //createSummary(oINCID, 0, 0, 'Report Incident', 'Incident Created', 'Created');
 
@@ -682,6 +685,44 @@ module.exports = cds.service.impl(function (){
             //Error log
             tx1 = cds.transaction(req);
             result = await tx1.run(`CALL "prCreateErrorLog"(?,?,?,?,?,?)`, ['Delete Lesson Learned', 'DeleteLessonLearned', req.data.XkXwXp4nCf5azs0U, error.toString(), 'Incident', 'USERID']);
+            console.log(result);
+
+            if (tx) {
+                await tx.rollback(error); 
+            }
+            return error.toString();
+        }
+    })
+
+    //Close Incident
+    this.on("bzdL4LlCePu94OI9", async(req)=>{
+        try{
+            let result;
+            payload = req.data;
+            oInput = JSON.parse(payload.XkXwXp4nCf5azs0U);
+            const oCloseIncident = oInput.CloseIncident ;
+            tx = cds.transaction(req);
+
+            result = await tx.run(`CALL "prUpdateCloseIncident"(?)`,[setValue(oCloseIncident.INCID)])
+            console.log(result);
+
+            //Audit log
+            result = await tx.run(`CALL "prCreateAuditLog"(?,?,?,?,?,?)`, [setValue(oCloseIncident.INCID),setValue(oCloseIncident.INCID),'CloseIncident','CloseIncident',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName']);
+            console.log(result);
+            //createAuditLog(oINCID,oINCID,'CreateIncidnt','CreateIncident',JSON.stringify(req.data.XkXwXp4nCf5azs0U),'ViewName');
+
+            //Summary
+            result = await tx.run(`CALL "prCreateEventSummary"(?,?,?,?,?,?)`, [setValue(oCloseIncident.INCID), 0, 0, 'Close Incident', 'Close Incident', 'Updated']);
+            console.log(result);
+            //createSummary(oINCID, 0, 0, 'Report Incident', 'Incident Created', 'Created');
+
+            // await tx.commit();
+            return `{ \"Success\":\"Close Incident\" , \"Incident Id\":${oCloseIncident.INCID} }`;
+        }
+        catch(error){
+            //Error log
+            tx1 = cds.transaction(req);
+            result = await tx1.run(`CALL "prCreateErrorLog"(?,?,?,?,?,?)`, ['Close Incident', 'CloseIncident', req.data.XkXwXp4nCf5azs0U, error.toString(), 'Incident', 'USERID']);
             console.log(result);
 
             if (tx) {

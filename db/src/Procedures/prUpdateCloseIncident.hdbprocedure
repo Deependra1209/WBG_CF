@@ -1,0 +1,14 @@
+PROCEDURE "prUpdateCloseIncident" (
+    IN INCID INTEGER
+)
+LANGUAGE SQLSCRIPT
+SQL SECURITY INVOKER
+AS
+BEGIN
+        UPDATE INC_T_INCDT
+        SET INCST = 1460,
+            CHNBY	= Session_user,
+            CHNDT	= current_date,
+            CHNTM	= current_time
+        WHERE INCID = :INCID AND ISDEL = '0';
+END;

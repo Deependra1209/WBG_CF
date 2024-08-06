@@ -26,6 +26,7 @@ service IncidentPortal {
     entity YzTD4CGRwMPdd4l7 as select from INC.OHS.REPORTSIGNOFF;
     entity aKJwsXTBT9VgL7Rn as select from INC.OHS.FOLLOWUP;
     entity V3MCsbtg9exCq9nI as select from INC.OHS.FOLLOWUPSENDTO;
+    entity s1chi3hj0b37a2w0 as select from INC.OHS.LINKEDINCIDENTDATA;
 
     //Report Incident Tab
     entity ej4myIFssTTENpBx as select from INC.OHS.INCIDENTDETAILS;
@@ -43,6 +44,10 @@ service IncidentPortal {
     entity SmfVsZV35secM59i as select from INC.OHS.NEARMISS;
     entity xcltsfVMnAPjYN3m as select from INC.OHS.TYPEOFNEARMISS;
     entity Dm7vUlq05pVQXyuG as select from INC.OHS.POTENTIALNEARMISS;
+
+    //LPKPI
+    entity GwXZz6uP70B2Dp3q as select from INC.OHS.LPKPI;
+
 
 //__________________________________________________POST SERVICES____________________________________________________//
     ////Delete Body Part
@@ -73,14 +78,15 @@ service IncidentPortal {
     action xksfxrsnnvml2pzk(XkXwXp4nCf5azs0U  : String) returns String;
 
     // Delete Chain of Events
-    function eddl7wz9zoatww19(XkXwXp4nCf5azs0U  : String) returns String;
+    action eddl7wz9zoatww19(XkXwXp4nCf5azs0U  : String) returns String;
 
     // Delete Corrective Action
-    function d2hhhqmepsgh7g3i(XkXwXp4nCf5azs0U  : String) returns String;
+    action d2hhhqmepsgh7g3i(XkXwXp4nCf5azs0U  : String) returns String;
 
     // Delete Lesson Learn
-    function i5j7kek2aqkevyca(XkXwXp4nCf5azs0U  : String) returns String;
+    action i5j7kek2aqkevyca(XkXwXp4nCf5azs0U  : String) returns String;
 
-
+    //Close Incident
+    action bzdL4LlCePu94OI9(XkXwXp4nCf5azs0U : String) returns String;
     
 } 

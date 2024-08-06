@@ -94,6 +94,15 @@ context M{
 }
 
 context OHS {
+
+    @cds.persistence.exists
+    entity LPKPI(){
+        IJOpen : Integer;
+        IJclosed : Integer;
+        NMopen : Integer;
+        NMClosed : Integer;
+    }
+
     @cds.persistence.exists
     entity LANDINGPAGE(){
         key INCID:Integer;
@@ -178,6 +187,7 @@ context OHS {
         PRIID  : Integer;
         LIKID  : Integer;
         LIKIDTXT:String(1000);
+        
     }
 
     @cds.persistence.exists
@@ -260,6 +270,12 @@ context OHS {
         FUPID  : Integer;
         EMPID  : String(30);
         FSTNM : String(250);
+    }
+
+    @cds.persistence.exists
+    entity CORRECTIVEACTKPI(){
+        key Open : Integer;
+        Closed : Integer;
     }
 
 
@@ -520,6 +536,7 @@ context OHS {
         key CRAID : Integer;
         INVID : Integer;
         INCID : Integer;
+        INCNMTXT : String(20);
         CAUSE : String(500);
         CADSC : String(1000);
         CATEG : Integer;
@@ -537,6 +554,12 @@ context OHS {
         CRTBY : String(30);
         CRTNM : String(500);
         CRTDT : Date;
+    }
+
+    @cds.persistence.exists
+    entity LINKEDINCIDENTDATA() {
+        key INCID : Integer;
+        INCNM : String(50);
     }
 
     

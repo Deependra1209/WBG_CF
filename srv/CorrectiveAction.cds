@@ -10,6 +10,9 @@ service CorrectiveAction {
     //Corrective Actions
     entity bpb8jfo8z1iase8p as select from INC.OHS.CORRECTIVEACTION;
 
+    //CA KPI
+    entity iyhtZ8VJYMG5a8Gf as select from INC.OHS.CORRECTIVEACTKPI;
+
     
 //__________________________________________________POST SERVICES____________________________________________________//
     //Reassign CA
